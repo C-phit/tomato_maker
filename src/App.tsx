@@ -102,34 +102,27 @@ function App() {
   // --- Newspaper Mode Logic ---
   const updateNewspaperBlock = (index: number, newNode: ModuleNode) => {
     setNewspaperBlocks(prev => {
-      const next = [...prev];
-      
       // Auto-fill logic check
       const strings = flattenHoles(newNode);
       const autofilled = autoFillMirror(strings);
       
       const { newNode: filledNode } = fillHoles(newNode, autofilled);
         
-      setNewspaperBlocks(current => {
-        const updated = [...current];
-        updated[index] = filledNode;
-        
-        // Next block logic
-        const isComplete = autofilled.every(s => s !== '');
-        if (isComplete && index === current.length - 1) {
-          updated.push({ id: generateId(), type: '3-hole', left: '', center: '', right: '' });
-          setTimeout(() => {
-            const rootBlocks = document.querySelectorAll('.newspaper-block.is-root');
-            const lastRootBlock = rootBlocks[rootBlocks.length - 1];
-            const firstInput = lastRootBlock?.querySelector('.char-input') as HTMLInputElement;
-            firstInput?.focus();
-          }, 0);
-        }
-        return updated;
-      });
-
-      next[index] = newNode;
-      return next;
+      const nextUpdated = [...prev];
+      nextUpdated[index] = filledNode;
+      
+      // Next block logic
+      const isComplete = autofilled.every(s => s !== '');
+      if (isComplete && index === nextUpdated.length - 1) {
+        nextUpdated.push({ id: generateId(), type: '3-hole', left: '', center: '', right: '' });
+        setTimeout(() => {
+          const rootBlocks = document.querySelectorAll('.newspaper-block.is-root');
+          const lastRootBlock = rootBlocks[rootBlocks.length - 1];
+          const firstInput = lastRootBlock?.querySelector('.char-input') as HTMLInputElement;
+          firstInput?.focus();
+        }, 0);
+      }
+      return nextUpdated;
     });
   };
 

@@ -42,7 +42,7 @@ export const NewspaperBlock = ({ node, ghostNode, onChange, onDelete, isRoot = f
         className={`char-input ${!node.left && ghostNode?.left ? 'is-ghost' : ''}`}
         value={!node.left && ghostNode?.left ? ghostNode.left : node.left}
         onChange={(e) => handleChange('left', e.target.value)}
-        placeholder=""
+        placeholder="あ"
       />
 
       {/* Center (Only for 3-hole) */}
@@ -60,7 +60,7 @@ export const NewspaperBlock = ({ node, ghostNode, onChange, onDelete, isRoot = f
         className={`char-input ${!node.right && ghostNode?.right ? 'is-ghost' : ''}`}
         value={!node.right && ghostNode?.right ? ghostNode.right : node.right}
         onChange={(e) => handleChange('right', e.target.value)}
-        placeholder=""
+        placeholder="あ"
       />
     </div>
   );
@@ -97,7 +97,7 @@ const CenterHole = ({ node, ghostNode, onChange }: CenterHoleProps) => {
               onChange(val);
             }
           }}
-          placeholder=""
+          placeholder="い"
         />
       </div>
     );
